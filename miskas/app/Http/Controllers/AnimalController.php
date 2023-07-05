@@ -59,7 +59,6 @@ class AnimalController extends Controller
 
         $collection = collect($this->animals);
 
-        
         // chane`inimas - kolekciju metodu jungimas i viena
 
         // $collection = 
@@ -76,9 +75,12 @@ class AnimalController extends Controller
         // collection map - kai norim ka nors prideti
         // collection filter - kai norim ka nors ismest
 
+        // pluck - selectorius, ka pagaminti ant collection.
         $collection = $collection->pluck('type')->unique()->all();
+        // unique() - isrenka tik unikalius
+        // all() - pavercia i masyva
 
-        // issipausdinti array narsykleje arba terminale. bet nelabai naudosim
+        // issipausdinti array narsykleje arba terminale
         dump($collection);
 
         return view('forest.animals', [
