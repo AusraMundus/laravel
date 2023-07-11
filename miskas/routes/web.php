@@ -48,7 +48,8 @@ Route::prefix('colors')->name('colors-')->group(function () {
 });
 
 
-
+// Login`as
 Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
