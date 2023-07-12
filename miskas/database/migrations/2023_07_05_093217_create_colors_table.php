@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('color', 7);
             $table->unsignedTinyInteger('rate')->default(1);
-            $table->string('author', 50);
+
+            // lenteliu surisimas. Autorius is pagrindines lenteles surisimas su autoriumi is autoriu lenteles
+            $table->unsignedBigInteger('author_id');
+            $table->foreign('author_id')->references('id')->on('authors');
+
             $table->timestamps();
         });
     }

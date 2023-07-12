@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AnimalController as A;
+use App\Http\Controllers\AnimalController as An;
 use App\Http\Controllers\CalculatorController as C;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ColorController as R;
+use App\Http\Controllers\AuthorController as A;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,11 +24,11 @@ Route::get('/', function () {
 
 // trumpesnis uzrasymas: 'App\Http\Controllers\AnimalController' -> A::class
 
-Route::get('/animals', [A::class, 'animals']);
+Route::get('/animals', [An::class, 'animals']);
 
 // kai irasymas per parametra - kintamasis i {}
 // {color?} - su klaustuku optional parametrai
-Route::get('/animals/racoon/{color?}', [A::class, 'racoon']);
+Route::get('/animals/racoon/{color?}', [An::class, 'racoon']);
 
 
 // Calculator
@@ -47,6 +48,18 @@ Route::prefix('colors')->name('colors-')->group(function () {
 
 });
 
+// Autoriu crud
+Route::prefix('authors')->name('authors-')->group(function () {
+
+    Route::get('/', [A::class, 'index'])->name('index');
+    Route::get('/create', [A::class, 'create'])->name('create');
+    Route::post('/', [A::class, 'store'])->name('store');
+    Route::get('/delete/{author}', [A::class, 'delete'])->name('delete');
+    Route::delete('/{author}', [A::class, 'destroy'])->name('destroy');
+    Route::get('/edit/{author}', [A::class, 'edit'])->name('edit');
+    Route::put('/{author}', [A::class, 'update'])->name('update');
+
+});
 
 // Login`as
 Auth::routes();

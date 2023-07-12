@@ -19,7 +19,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Rate</label>
-                            <input name="color_rate" type="number" class="form-control" value="{{old('color_rate', $color->rate)}}">
+                            <input name="color_rate" type="number" class="form-control" value={{old('color_rate', $color->rate)}}>
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                         <a href="{{route('colors-index')}}" class="btn btn-secondary">Cancel</a>
