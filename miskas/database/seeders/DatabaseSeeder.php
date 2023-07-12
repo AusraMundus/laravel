@@ -33,6 +33,13 @@ class DatabaseSeeder extends Seeder
                 'name' => $faker->name
             ]);
         }
-        
+
+        foreach (range(1, 200) as $_) {
+            DB::table('colors')->insert([
+                'color' => $faker->hexcolor,
+                'author_id'=> $faker->numberBetween(1, 20),
+                'rate' => $faker->numberBetween(1, 10)
+            ]);
+        }
     }
 }
