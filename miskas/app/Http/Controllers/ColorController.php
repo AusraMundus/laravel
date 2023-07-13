@@ -12,13 +12,56 @@ class ColorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         
-        $colors = Color::all();
+        $sortBy = $request->sort_by ?? '';
+        $orderBy = $request->order_by ?? '';
+        if ($orderBy && !in_array($orderBy, ['asc', 'desc'])) {
+            $orderBy = '';
+        }
+        $filterBy = $request->filter_by ?? '';
+        $filterValue = $request->filter_value ?? '0';
+        $perPage = (int) $request->per_page ?? 20;
+        
+        if ($request->s) {
+
+            $colors = Color::where('color', 'like', '%'.$request->s.'%')->paginate(20)->withQueryString();
+        
+        } else {
+        
+            $colors = Color::select('colors.*');
+
+            //filtravimas
+            $colors = match($filterBy) {
+                'rate' => $colors->where('rate', '=', $filterValue),
+                default => $colors
+            };
+
+            //rikiavimas
+            $colors = match($sortBy) {
+                'color' => $colors->orderBy('color', $orderBy),
+                'rate' => $colors->orderBy('rate', $orderBy),
+                default => $colors
+            };
+
+
+            $colors = $colors->paginate($perPage)->withQueryString();
+
+        }
+
+       
+
+
         
         return view('colors.index', [
-            'colors' => $colors
+            'colors' => $colors,
+            'sortBy' => $sortBy,
+            'orderBy' => $orderBy,
+            'filterBy' => $filterBy,
+            'filterValue' => $filterValue,
+            'perPage' => $perPage,
+            's' => $request->s ?? ''
         ]);
     }
 
