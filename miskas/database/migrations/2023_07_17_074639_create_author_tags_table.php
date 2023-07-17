@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('colors', function (Blueprint $table) {
+        Schema::create('author_tags', function (Blueprint $table) {
             $table->id();
-            $table->string('color', 7);
-            $table->unsignedTinyInteger('rate')->default(1);
-
-            // lenteliu surisimas. Autorius is tevines lenteles surisimas su autoriumi is vaikines lenteles
             $table->unsignedBigInteger('author_id');
-            $table->foreign('author_id')->references('id')->on('authors');
-
+            $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
+            $table->unsignedBigInteger('tag_id');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('colors');
+        Schema::dropIfExists('author_tags');
     }
 };

@@ -27,6 +27,7 @@ class ColorController extends Controller
         if ($request->s) {
 
             $colors = Color::where('color', 'like', '%'.$request->s.'%')->paginate(20)->withQueryString();
+            // dump(Color::where('color', 'like', '%'.$request->s.'%')->-get());
         
         } else {
         

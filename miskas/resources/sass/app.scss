@@ -6,3 +6,10 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+.index-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin: 5px 0;
+    gap:5px;
+}

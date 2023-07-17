@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        $faker = Faker::create('lt_LT');
+        $faker = Faker::create();
 
         DB::table('users')->insert([
             'name' => 'Bebras',
@@ -39,6 +39,12 @@ class DatabaseSeeder extends Seeder
                 'color' => $faker->hexcolor,
                 'author_id'=> $faker->numberBetween(1, 20),
                 'rate' => $faker->numberBetween(1, 10)
+            ]);
+        }
+
+        foreach (range(1, 30) as $_) {
+            DB::table('tags')->insert([
+                'name' => $faker->cityPrefix . $faker->streetSuffix
             ]);
         }
     }
