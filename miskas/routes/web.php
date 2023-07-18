@@ -61,6 +61,8 @@ Route::prefix('authors')->name('authors-')->group(function () {
     Route::put('/{author}', [A::class, 'update'])->name('update');
 
     Route::post('/tags/{author}', [A::class, 'addTag'])->name('add-tag');
+    Route::delete('/tags/{author}/{tag}', [A::class, 'removeTag'])->name('remove-tag');
+    Route::post('/tags/create/{author}', [A::class, 'createTag'])->name('create-tag');
 
 });
 
