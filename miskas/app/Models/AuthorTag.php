@@ -9,7 +9,7 @@ class AuthorTag extends Model
 {
     use HasFactory;
 
-
+    public $timestamps = false;
 
     // public function author()
     // {

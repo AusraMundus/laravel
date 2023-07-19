@@ -139,6 +139,7 @@ class AuthorController extends Controller
     }
 
 
+// Tag`ai
     public function addTag(Request $request, Author $author)
     {
         
@@ -215,7 +216,6 @@ class AuthorController extends Controller
         ]
         );
         
-        
         if ($validator->fails()) {
             $request->flash();
             return redirect()->back()->withErrors($validator);
@@ -224,7 +224,6 @@ class AuthorController extends Controller
         $tag = Tag::firstOrCreate([
             'name' => $tagName
         ]);
-        
         
         $authorTag = new AuthorTag;
         $authorTag->author_id = $authorId;
