@@ -8,19 +8,15 @@ use App\Models\AuthorTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use App\Services\RolesService;
-
 
 class AuthorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(RolesService $service)
+    public function index()
     {
         
-        dump($service->kasTu);
-
         $authors = Author::all();
         $tags = Tag::all();
         
@@ -142,7 +138,6 @@ class AuthorController extends Controller
     }
 
 
-// Tag`ai
     public function addTag(Request $request, Author $author)
     {
         
@@ -219,6 +214,7 @@ class AuthorController extends Controller
         ]
         );
         
+        
         if ($validator->fails()) {
             $request->flash();
             return redirect()->back()->withErrors($validator);
@@ -227,6 +223,7 @@ class AuthorController extends Controller
         $tag = Tag::firstOrCreate([
             'name' => $tagName
         ]);
+        
         
         $authorTag = new AuthorTag;
         $authorTag->author_id = $authorId;
