@@ -14,9 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
         $faker = Faker::create();
-
+        
         DB::table('users')->insert([
             'name' => 'Bebras',
             'email' => 'bebras@gmail.com',
@@ -45,7 +44,7 @@ class DatabaseSeeder extends Seeder
         foreach (range(1, 200) as $_) {
             DB::table('colors')->insert([
                 'color' => $faker->hexcolor,
-                'author_id'=> $faker->numberBetween(1, 20),
+                'author_id' => $faker->numberBetween(1, 20),
                 'rate' => $faker->numberBetween(1, 10)
             ]);
         }
@@ -55,5 +54,31 @@ class DatabaseSeeder extends Seeder
                 'name' => $faker->cityPrefix . $faker->streetSuffix
             ]);
         }
+
+
+
+        foreach (range(1, 20) as $authorId) {
+            foreach (range(1, 30) as $tagId) {
+                if (!rand(0, 12)) {
+                    DB::table('author_tags')->insert([
+                        'author_id' => $authorId,
+                        'tag_id' => $tagId
+                    ]);
+                }
+            }
+        }
+
+
+        foreach (range(1, 20) as $_) {
+            $colors = [];
+            foreach (range(1, rand(2, 10)) as $_) {
+                $colors[] = $faker->hexcolor;
+            }
+            DB::table('palettes')->insert([
+                'colors' => json_encode($colors)
+            ]);
+        }
+        
+
     }
 }

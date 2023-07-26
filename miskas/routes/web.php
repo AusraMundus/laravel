@@ -7,6 +7,7 @@ use App\Http\Controllers\CalculatorController as C;
 use App\Http\Controllers\ColorController as R;
 use App\Http\Controllers\AuthorController as A;
 use App\Http\Controllers\TagController as T;
+use App\Http\Controllers\PaletteController as P;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +84,21 @@ Route::prefix('tags')->name('tags-')->group(function () {
     Route::put('/{tag}', [T::class, 'update'])->name('update');
 
 });
+
+// Palettes
+
+Route::prefix('palettes')->name('palettes-')->group(function () {
+
+    Route::get('/', [P::class, 'index'])->name('index'); // GET /palettes from URL:  palettes Name: palettes-index
+    Route::get('/create', [P::class, 'create'])->name('create'); // GET /palettes/create from URL:  palettes/create Name: palettes-create
+    Route::post('/', [P::class, 'store'])->name('store'); // POST /palettes from URL:  palettes Name: palettes-store
+    Route::get('/delete/{palette}', [P::class, 'delete'])->name('delete'); // GET /palettes/delete/{palette} from URL:  palettes/delete/{palette} Name: palettes-delete
+    Route::delete('/{palette}', [P::class, 'destroy'])->name('destroy'); // DELETE /palettes/{palette} from URL:  palettes/{palette} Name: palettes-destroy 
+    Route::get('/edit/{palette}', [P::class, 'edit'])->name('edit'); // GET /palettes/edit/{palette} from URL:  palettes/edit/{palette} Name: palettes-edit
+    Route::put('/{palette}', [P::class, 'update'])->name('update'); // PUT /palettes/{palette} from URL:  palettes/{palette} Name: palettes-update
+
+});
+
 
 
 // Login`as
